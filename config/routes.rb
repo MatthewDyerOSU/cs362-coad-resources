@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   authenticate :user do
 
     resources :tickets, only: :destroy
+    resources :states
 
     resources :organizations do
       member do
