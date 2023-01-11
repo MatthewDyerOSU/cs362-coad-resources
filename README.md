@@ -30,6 +30,8 @@ Next, set up the database:
 ```
 rails db:setup
 ```
+**Important:**<br>
+You will need to set up the `.env` file or set the relevant environment variables. See the `.env.example` file in the project for help.
 
 If you want, you can create some seed data in the database:
 
@@ -57,7 +59,9 @@ You can also run a specific directory of tests or file by supplying its name, li
 spring rspec spec/path/to/file_spec.rb
 ```
 
-## Deployment
+## Deployment (Legacy)
+Note to current/future maintainers:<br>
+Heroku no longer supports free dynos, thus Heroku is not a good place to test this application.
 
 This application uses [heroku for deployment](https://devcenter.heroku.com/articles/git).
 Some useful commands to know can be found below.
@@ -67,7 +71,6 @@ Set up a heroku app to deploy to:
 ```
 heroku git:remote -a coad-resources-staging
 heroku git:remote -a coad-resources
-
 ```
 
 Rename them _staging_ and _production_:
@@ -75,7 +78,6 @@ Rename them _staging_ and _production_:
 ```
 git remote rename coad-resources-staging staging
 git remote rename coad-resources production
-
 ```
 
 Deploy to a heroku app:
