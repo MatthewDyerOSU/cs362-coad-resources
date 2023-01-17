@@ -1,3 +1,6 @@
+##
+# An admin or a member of an organization.
+#
 class User < ApplicationRecord
 
   enum role: [:admin, :organization]

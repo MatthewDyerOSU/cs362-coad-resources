@@ -1,3 +1,6 @@
+##
+# The requests for help from people on the internet.
+#
 class Ticket < ApplicationRecord
 
   belongs_to :region

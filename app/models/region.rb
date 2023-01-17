@@ -1,3 +1,6 @@
+##
+# A location category for tickets.
+#
 class Region < ApplicationRecord
 
   has_many :tickets
