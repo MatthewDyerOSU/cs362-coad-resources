@@ -6,4 +6,8 @@ RSpec.describe Organization, type: :model do
     Organization.new
   end
 
+  it 'has a name' do
+    expect(Organization).to respond_to(:name)
+  end
+
 end
