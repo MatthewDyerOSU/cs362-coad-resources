@@ -36,4 +36,8 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:confirmation_token)
   end
 
+  it 'has a confirmed_at' do
+    expect(user).to respond_to(:confirmed_at)
+  end
+
 end
