@@ -8,4 +8,8 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category).to respond_to(:name)
   end
 
+  it 'responds to active' do
+    expect(resource_category).to respond_to(:active)
+  end
+
 end
