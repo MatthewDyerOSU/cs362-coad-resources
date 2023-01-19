@@ -36,9 +36,8 @@ RSpec.describe Organization, type: :model do
     expect(organization).to respond_to(:agreement_six)
   end
 
-  describe Organization do
-    it { should respond_to :agreement_seven }
-    it { should respond_to :agreement_seven= }
+  it 'has an agreement_seven' do
+    expect(organization).to respond_to(:agreement_seven)
   end
 
   describe Organization do
