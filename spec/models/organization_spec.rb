@@ -80,5 +80,7 @@ RSpec.describe Organization, type: :model do
     expect(organization).to respond_to(:agreement_eight)
   end
 
+  it { should have_many :users }
+
 
 end
