@@ -81,6 +81,8 @@ RSpec.describe Organization, type: :model do
   end
 
   it { should have_many :users }
+  it { should have_many :tickets }
+
 
 
 end
