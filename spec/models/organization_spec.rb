@@ -20,14 +20,12 @@ RSpec.describe Organization, type: :model do
     expect(organization).to respond_to(:agreement_two)
   end
 
-  describe Organization do
-    it { should respond_to :agreement_three }
-    it { should respond_to :agreement_three= }
+  it 'has an agreement_three' do
+    expect(organization).to respond_to(:agreement_three)
   end
 
-  describe Organization do
-    it { should respond_to :agreement_four }
-    it { should respond_to :agreement_four= }
+  it 'has an agreement_four' do
+    expect(organization).to respond_to(:agreement_three)
   end
 
   describe Organization do
