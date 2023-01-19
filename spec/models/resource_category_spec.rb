@@ -12,4 +12,8 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category).to respond_to(:active)
   end
 
+  it 'responds to organizations' do
+    expect(resource_category).to respond_to(:organizations)
+  end
+
 end
