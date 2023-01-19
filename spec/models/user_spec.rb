@@ -12,8 +12,12 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:role)
   end
 
-  it 'has a email' do
+  it 'has an email' do
     expect(user).to respond_to(:email)
+  end
+
+  it 'has an encrypted_password' do
+    expect(user).to respond_to(:encrypted_password)
   end
 
 end
