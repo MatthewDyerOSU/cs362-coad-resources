@@ -44,6 +44,10 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:confirmation_sent_at)
   end
 
+  it 'has an unconfirmed_email' do
+    expect(user).to respond_to(:unconfirmed_email)
+  end
+
 
 
 end
