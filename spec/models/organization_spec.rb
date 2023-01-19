@@ -12,6 +12,10 @@ RSpec.describe Organization, type: :model do
     expect(organization).to respond_to(:phone)
   end
 
+  it 'has an email' do
+    expect(organization).to respond_to(:email)
+  end
+
   it 'has an agreement_one' do
     expect(organization).to respond_to(:agreement_one)
   end
