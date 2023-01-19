@@ -12,12 +12,10 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category).to respond_to(:active)
   end
 
+  it { should have_many :tickets }
+
   it 'responds to organizations' do
     expect(resource_category).to respond_to(:organizations)
-  end
-
-  it 'responds to tickets' do
-    expect(resource_category).to respond_to(:tickets)
   end
 
 end
