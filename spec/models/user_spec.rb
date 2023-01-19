@@ -48,6 +48,8 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:unconfirmed_email)
   end
 
+  it { should belong_to(:organization).optional }
+
 
 
 end
