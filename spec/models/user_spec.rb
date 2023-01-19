@@ -40,4 +40,10 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:confirmed_at)
   end
 
+  it 'has a confirmation_sent_at' do
+    expect(user).to respond_to(:confirmation_sent_at)
+  end
+
+
+
 end
