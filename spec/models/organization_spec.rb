@@ -44,6 +44,10 @@ RSpec.describe Organization, type: :model do
     expect(organization).to respond_to(:title)
   end
 
+  it 'has transportation' do
+    expect(organization).to respond_to(:transportation)
+  end
+
   it 'has an agreement_one' do
     expect(organization).to respond_to(:agreement_one)
   end
