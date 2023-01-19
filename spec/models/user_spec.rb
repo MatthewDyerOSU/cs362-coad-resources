@@ -12,4 +12,8 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:role)
   end
 
+  it 'has a email' do
+    expect(user).to respond_to(:email)
+  end
+
 end
