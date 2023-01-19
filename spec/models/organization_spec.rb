@@ -96,6 +96,9 @@ RSpec.describe Organization, type: :model do
 
   it { should validate_presence_of(:primary_name) }
 
+  it { should validate_presence_of(:secondary_name) }
+
+
 
 
 end
