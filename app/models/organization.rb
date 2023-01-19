@@ -23,17 +23,6 @@ class Organization < ApplicationRecord
   validates_uniqueness_of :name, case_sensitive: false
   validates_length_of :description, maximum: 1020, on: :create
 
-  def intitialize ()
-    @agreement_one = agreement_one
-    @agreement_two = agreement_two
-    @agreement_three = agreement_three
-    @agreement_four = agreement_four
-    @agreement_five = agreement_five
-    @agreement_six = agreement_six
-    @agreement_seven = agreement_seven
-    @agreement_eight = agreement_eight
-  end
-
   def approve
     self.status = :approved
   end
