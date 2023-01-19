@@ -29,6 +29,8 @@ class Organization < ApplicationRecord
     @agreement_three = agreement_three
     @agreement_four = agreement_four
     @agreement_five = agreement_five
+    @agreement_six = agreement_six
+    @agreement_seven = agreement_seven
   end
 
   def approve

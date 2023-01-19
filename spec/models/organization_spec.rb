@@ -35,4 +35,20 @@ RSpec.describe Organization, type: :model do
     it { should respond_to :agreement_five= }
   end
 
+  describe Organization do
+    it { should respond_to :agreement_five }
+    it { should respond_to :agreement_five= }
+  end
+
+  describe Organization do
+    it { should respond_to :agreement_six }
+    it { should respond_to :agreement_six= }
+  end
+
+  describe Organization do
+    it { should respond_to :agreement_seven }
+    it { should respond_to :agreement_seven= }
+  end
+
+  
 end
