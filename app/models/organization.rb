@@ -25,6 +25,7 @@ class Organization < ApplicationRecord
 
   def intitialize (agreement_one)
     @agreement_one = agreement_one
+    @agreement_two = agreement_two
   end
 
   def approve
