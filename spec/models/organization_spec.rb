@@ -16,8 +16,12 @@ RSpec.describe Organization, type: :model do
     expect(organization).to respond_to(:email)
   end
 
-  it 'has an description' do
+  it 'has a description' do
     expect(organization).to respond_to(:description)
+  end
+
+  it 'has a rejection_reason' do
+    expect(organization).to respond_to(:rejection_reason)
   end
 
   it 'has an agreement_one' do
