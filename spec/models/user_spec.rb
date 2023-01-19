@@ -20,4 +20,8 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:encrypted_password)
   end
 
+  it 'has a reset_password_token' do
+    expect(user).to respond_to(:reset_password_token)
+  end
+
 end
