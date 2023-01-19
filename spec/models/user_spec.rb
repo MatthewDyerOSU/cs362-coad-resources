@@ -32,4 +32,8 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:remember_created_at)
   end
 
+  it 'has a confirmation_token' do
+    expect(user).to respond_to(:confirmation_token)
+  end
+
 end
