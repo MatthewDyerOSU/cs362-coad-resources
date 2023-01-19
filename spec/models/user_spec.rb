@@ -24,4 +24,8 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:reset_password_token)
   end
 
+  it 'has a reset_password_sent_at' do
+    expect(user).to respond_to(:reset_password_sent_at)
+  end
+
 end
