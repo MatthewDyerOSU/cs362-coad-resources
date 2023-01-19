@@ -28,4 +28,8 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to respond_to(:region)
   end
 
+  it 'responds to resource_category' do
+    expect(ticket).to respond_to(:resource_category)
+  end
+
 end
