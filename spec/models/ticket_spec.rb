@@ -16,4 +16,12 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to respond_to(:description)
   end
 
+  it 'responds to closed' do
+    expect(ticket).to respond_to(:closed)
+  end
+
+  it 'responds to closed_at' do
+    expect(ticket).to respond_to(:closed_at)
+  end
+
 end
