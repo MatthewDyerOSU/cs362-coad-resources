@@ -28,4 +28,8 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:reset_password_sent_at)
   end
 
+  it 'has a remember_created_at' do
+    expect(user).to respond_to(:remember_created_at)
+  end
+
 end
