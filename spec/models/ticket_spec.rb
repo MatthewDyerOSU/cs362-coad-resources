@@ -8,4 +8,8 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to respond_to(:name)
   end
 
+  it 'responds to phone' do
+    expect(ticket).to respond_to(:phone)
+  end
+
 end
