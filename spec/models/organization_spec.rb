@@ -24,6 +24,10 @@ RSpec.describe Organization, type: :model do
     expect(organization).to respond_to(:rejection_reason)
   end
 
+  it 'has liability_insurance' do
+    expect(organization).to respond_to(:liability_insurance)
+  end
+
   it 'has an agreement_one' do
     expect(organization).to respond_to(:agreement_one)
   end
