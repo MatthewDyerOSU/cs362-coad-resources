@@ -14,8 +14,6 @@ RSpec.describe ResourceCategory, type: :model do
 
   it { should have_many :tickets }
 
-  it 'responds to organizations' do
-    expect(resource_category).to respond_to(:organizations)
-  end
+  it { should have_and_belong_to_many :organizations }
 
 end
