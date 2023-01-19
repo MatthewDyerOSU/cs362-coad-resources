@@ -32,8 +32,6 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to respond_to(:resource_category)
   end
 
-  it 'responds to organization' do
-    expect(ticket).to respond_to(:organization)
-  end
+  it { should belong_to :region }
 
 end
