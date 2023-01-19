@@ -16,4 +16,8 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category).to respond_to(:organizations)
   end
 
+  it 'responds to tickets' do
+    expect(resource_category).to respond_to(:tickets)
+  end
+
 end
