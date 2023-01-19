@@ -2,13 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
 
+  let (:organization) { Organization.new}
+
   it 'has a name' do
-    expect(Organization).to respond_to(:name)
+    expect(organization).to respond_to(:name)
   end
 
-  describe Organization do
-    it { should respond_to :agreement_one }
-    it { should respond_to :agreement_one= }
+  it 'has a phone' do
+    expect(organization).to respond_to(:phone)
+  end
+
+  it 'has an agreement_one' do
+    expect(organization).to respond_to(:agreement_one)
   end
 
   describe Organization do
