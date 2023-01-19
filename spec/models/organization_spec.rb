@@ -36,6 +36,10 @@ RSpec.describe Organization, type: :model do
     expect(organization).to respond_to(:secondary_name)
   end
 
+  it 'has a secondary_phone' do
+    expect(organization).to respond_to(:secondary_phone)
+  end
+
   it 'has an agreement_one' do
     expect(organization).to respond_to(:agreement_one)
   end
