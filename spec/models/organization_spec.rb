@@ -36,11 +36,6 @@ RSpec.describe Organization, type: :model do
   end
 
   describe Organization do
-    it { should respond_to :agreement_five }
-    it { should respond_to :agreement_five= }
-  end
-
-  describe Organization do
     it { should respond_to :agreement_six }
     it { should respond_to :agreement_six= }
   end
@@ -48,6 +43,11 @@ RSpec.describe Organization, type: :model do
   describe Organization do
     it { should respond_to :agreement_seven }
     it { should respond_to :agreement_seven= }
+  end
+
+  describe Organization do
+    it { should respond_to :agreement_eight }
+    it { should respond_to :agreement_eight= }
   end
 
   
