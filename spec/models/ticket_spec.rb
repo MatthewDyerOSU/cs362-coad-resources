@@ -2,7 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
 
-  let (:ticket) { Ticket.new }
+  let (:ticket) { Ticket.new(
+    name: 'Test Name',
+    phone: '+1 408-402-1234',
+    description: 'Test Description',
+    resource_category: ResourceCategory.new,
+    region: Region.new
+  ) }
 
   it 'responds to name' do
     expect(ticket).to respond_to(:name)
@@ -35,6 +41,14 @@ RSpec.describe Ticket, type: :model do
     it { should validate_presence_of :phone }
     it { should validate_length_of(:name).is_at_least(1).is_at_most(255).on(:create) }
     it { should validate_length_of(:description).is_at_most(1020).on(:create) }
+    it 'validates phone number' do
+      ticket.phone = '1234567890'
+      expect(Phony.plausible?(ticket.phone)).to be false
+      expect(ticket).to_not be_valid
+      ticket.phone = '+1 408-402-5812'
+      expect(Phony.plausible?(ticket.phone)).to be true
+      expect(ticket).to be_valid
+    end
   end
 
 end
