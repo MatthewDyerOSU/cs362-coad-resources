@@ -102,6 +102,10 @@ RSpec.describe Organization, type: :model do
 
   it { should validate_length_of(:email).is_at_least(1).is_at_most(255).on(:create) }
 
+  # needs test of validation of :email, format { with: VALID_EMAIL_REGEX }
+
+  it { should validate_uniqueness_of(:email).case_insensitive }
+
 
 
 
