@@ -100,6 +100,8 @@ RSpec.describe Organization, type: :model do
 
   it { should validate_presence_of(:secondary_phone) }
 
+  it { should validate_length_of (:email) }
+
 
 
 
