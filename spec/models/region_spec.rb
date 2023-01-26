@@ -45,6 +45,12 @@ RSpec.describe Region, type: :model do
       expect(region).to eq(Region.first)
     end
 
+    it 'finds an existing region if one exists' do
+      test_region = Region.create!(name: 'Unspecified')
+      region = Region.unspecified
+      expect(region).to eq test_region
+    end
+
   end
 
 end
