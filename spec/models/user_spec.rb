@@ -59,6 +59,12 @@ RSpec.describe User, type: :model do
     specify { expect(user).to_not allow_value('foo').for(:email) }
   end
 
+  it "has an valid email" do
+    email = "valid@email.com"
+    user = User.new(email: email)
+    expect(user).to allow_value(email).for(:email)
+  end
+
   it { should validate_uniqueness_of(:email).case_insensitive }
 
   it { should validate_presence_of(:password).on(:create) }
