@@ -58,6 +58,14 @@ RSpec.describe Ticket, type: :model do
       ticket = Ticket.new(closed: true)
       expect(ticket.open?).to be false
     end
+
+    it 'is captured when organization is present' do
+      ticket = Ticket.new(organization: nil)
+      expect(ticket.captured?).to be false
+      ticket = Ticket.new(organization: Organization.new)
+      expect(ticket.captured?).to be true
+    end
+
   end
 
 end
