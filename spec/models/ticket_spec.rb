@@ -51,4 +51,13 @@ RSpec.describe Ticket, type: :model do
     end
   end
 
+  describe 'instance methods' do
+    it 'is open when not closed' do
+      ticket = Ticket.new(closed: false)
+      expect(ticket.open?).to be true
+      ticket = Ticket.new(closed: true)
+      expect(ticket.open?).to be false
+    end
+  end
+
 end
