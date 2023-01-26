@@ -46,4 +46,10 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category.active).to be true
   end
 
+  it 'is not active when deactivate member function is called' do
+    resource_category = ResourceCategory.new
+    resource_category.deactivate
+    expect(resource_category.active).to be false
+  end
+
 end
