@@ -17,6 +17,11 @@ RSpec.describe Ticket, type: :model do
       name: 'Example Region',
     )
   }
+  let (:resource_category) {
+    ResourceCategory.create!(
+      name: 'Example Resource Category',
+    )
+  }
   let (:ticket) { Ticket.new(
     name: 'Test Name',
     phone: '+1 408-402-1234',
@@ -170,6 +175,17 @@ RSpec.describe Ticket, type: :model do
       expect(Ticket.region(region.id)).to include(ticket)
       expect(Ticket.region(region.id)).to include(ticket2)
       expect(Ticket.region(region.id)).to_not include(ticket3)
+    end
+    it 'returns all tickets for a specific resource category' do
+      ticket.resource_category = resource_category
+      ticket.save
+      ticket2.resource_category = resource_category
+      ticket2.save
+      ticket3.resource_category = nil
+      ticket3.save
+      expect(Ticket.resource_category(resource_category.id)).to include(ticket)
+      expect(Ticket.resource_category(resource_category.id)).to include(ticket2)
+      expect(Ticket.resource_category(resource_category.id)).to_not include(ticket3)
     end
   end
 
