@@ -76,6 +76,9 @@ RSpec.describe User, type: :model do
     expect(user.role).to eq('organization')
   end
 
-
+  it 'does not change the set default role' do
+    user = User.new(role: 'admin')
+    expect(user.role).to eq('admin')
+  end
 
 end
