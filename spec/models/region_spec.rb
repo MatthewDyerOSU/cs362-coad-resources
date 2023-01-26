@@ -30,5 +30,10 @@ RSpec.describe Region, type: :model do
     expect(result).to eq(name)
   end
 
+  describe 'unspecified region' do
+    it 'has a name of "Unspecified"' do
+      expect(Region.unspecified.name).to eq('Unspecified')
+    end
+  end
 
 end
