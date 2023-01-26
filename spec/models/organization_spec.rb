@@ -120,7 +120,7 @@ RSpec.describe Organization, type: :model do
     expect(organization.status).to eq('submitted')
   end
 
-  it 'does not change the set default status' do
+  it 'does not change the set status to default status' do
     organization = Organization.new(status: 'approved')
     expect(organization.status).to eq('approved')
   end
