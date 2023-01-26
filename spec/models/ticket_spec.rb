@@ -66,6 +66,12 @@ RSpec.describe Ticket, type: :model do
       expect(ticket.captured?).to be true
     end
 
+    it 'has a string representation that follows the pattern "Ticket <id>"' do
+      ticket = Ticket.new(id: 1)
+      result = ticket.to_s
+      expect(result).to eq('Ticket 1')
+    end
+
   end
 
 end
