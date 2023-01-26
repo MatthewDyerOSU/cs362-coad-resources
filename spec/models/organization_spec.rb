@@ -108,11 +108,11 @@ RSpec.describe Organization, type: :model do
     expect(organization).to_not allow_value(email).for(:email)
   end
 
-  # it "has a valid email" do
-  #   email = "valid@email.com"
-  #   organization = Organization.new(email: email)
-  #   expect(organization).to allow_value(email).for(:email)
-  # end
+  it "has a valid email" do
+    email = "valid@email.com"
+    organization = Organization.new(email: email)
+    expect(organization).to allow_value(email).for(:email)
+  end
 
   it { should validate_uniqueness_of(:email).case_insensitive }
 
