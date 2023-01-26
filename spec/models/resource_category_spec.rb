@@ -22,4 +22,8 @@ RSpec.describe ResourceCategory, type: :model do
     it { should validate_uniqueness_of(:name).case_insensitive }
   end
 
+  it 'has a name of "Unspecified"' do
+    expect(ResourceCategory.unspecified.name).to eq('Unspecified')
+  end
+
 end
