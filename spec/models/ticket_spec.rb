@@ -12,6 +12,11 @@ RSpec.describe Ticket, type: :model do
       secondary_phone: '+1 408-402-1235',
     )
   }
+  let (:region) {
+    Region.create!(
+      name: 'Example Region',
+    )
+  }
   let (:ticket) { Ticket.new(
     name: 'Test Name',
     phone: '+1 408-402-1234',
@@ -154,6 +159,17 @@ RSpec.describe Ticket, type: :model do
       ticket3.closed = true
       ticket3.save
       expect(Ticket.closed_organization(organization.id)).to_not include(ticket3)
+    end
+    it 'returns all tickets for a specific region' do
+      ticket.region = region
+      ticket.save
+      ticket2.region = region
+      ticket2.save
+      ticket3.region = nil
+      ticket3.save
+      expect(Ticket.region(region.id)).to include(ticket)
+      expect(Ticket.region(region.id)).to include(ticket2)
+      expect(Ticket.region(region.id)).to_not include(ticket3)
     end
   end
 
