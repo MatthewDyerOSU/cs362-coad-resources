@@ -9,6 +9,13 @@ RSpec.describe Ticket, type: :model do
     resource_category: ResourceCategory.new,
     region: Region.new
   ) }
+  let (:ticket2) { Ticket.new(
+    name: 'Test Name 2',
+    phone: '+1 408-402-1235',
+    description: 'Test Description',
+    resource_category: ResourceCategory.new,
+    region: Region.new
+  ) }
 
   it 'responds to name' do
     expect(ticket).to respond_to(:name)
@@ -79,12 +86,18 @@ RSpec.describe Ticket, type: :model do
       ticket.closed = false
       ticket.organization = nil
       ticket.save
+      ticket2.closed = true
+      ticket2.save
       expect(Ticket.open).to include(ticket)
+      expect(Ticket.open).to_not include(ticket2)
     end
     it 'returns closed tickets' do
       ticket.closed = true
       ticket.save
+      ticket2.closed = false
+      ticket2.save
       expect(Ticket.closed).to include(ticket)
+      expect(Ticket.closed).to_not include(ticket2)
     end
   end
 
