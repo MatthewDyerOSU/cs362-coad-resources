@@ -125,6 +125,12 @@ RSpec.describe Organization, type: :model do
     expect(organization.status).to eq('approved')
   end
 
+  it 'sets status to approved with approve member function' do
+    organization = Organization.new
+    organization.approve
+    expect(organization.status).to eq('approved')
+  end
+
 
 
 
