@@ -81,6 +81,11 @@ RSpec.describe Ticket, type: :model do
       ticket.save
       expect(Ticket.open).to include(ticket)
     end
+    it 'returns closed tickets' do
+      ticket.closed = true
+      ticket.save
+      expect(Ticket.closed).to include(ticket)
+    end
   end
 
 end
