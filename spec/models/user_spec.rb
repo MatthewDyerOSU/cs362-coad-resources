@@ -54,7 +54,6 @@ RSpec.describe User, type: :model do
 
   it { should validate_length_of(:email).is_at_least(1).is_at_most(255).on(:create) }
 
-  # need spec for validates :email, format: { with: VALID_EMAIL_REGEX }
   describe 'email format' do
     specify { expect(user).to allow_value('foo@example.com').for(:email) }
     specify { expect(user).to_not allow_value('foo').for(:email) }
@@ -65,5 +64,18 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:password).on(:create) }
 
   it { should validate_length_of(:password).is_at_least(7).is_at_most(255).on(:create) }
+
+  it 'has a string representation that is its email' do
+    email = 'eve@eavesdrop.org'
+    user = User.new(email: email)
+    result = user.to_s
+    expect(result).to eq(email)
+  end
+
+  it 'sets the unset default role to organization' do
+    expect(user.role).to eq('organization')
+  end
+
+
 
 end
