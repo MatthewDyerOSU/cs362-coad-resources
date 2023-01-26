@@ -52,4 +52,12 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category.active).to be false
   end
 
+  # describe 'scope methods' do
+  #   it 'returns active resource categories' do
+  #     resource_category.active = true
+  #     resource_category.save
+  #     expect(ResourceCategory.active).to include(resource_category)
+  #   end
+  # end
+
 end
