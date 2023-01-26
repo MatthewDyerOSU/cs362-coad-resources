@@ -2,6 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
 
+  let (:organization) {
+    Organization.create!(
+      email: 'example@example.org',
+      name: 'Example Organization',
+      phone: '+1 408-402-1234',
+      primary_name: 'Example Primary Name',
+      secondary_name: 'Example Secondary Name',
+      secondary_phone: '+1 408-402-1235',
+    )
+  }
   let (:ticket) { Ticket.new(
     name: 'Test Name',
     phone: '+1 408-402-1234',
@@ -12,6 +22,13 @@ RSpec.describe Ticket, type: :model do
   let (:ticket2) { Ticket.new(
     name: 'Test Name 2',
     phone: '+1 408-402-1235',
+    description: 'Test Description',
+    resource_category: ResourceCategory.new,
+    region: Region.new
+  ) }
+  let (:ticket3) { Ticket.new(
+    name: 'Test Name 3',
+    phone: '+1 408-402-1236',
     description: 'Test Description',
     resource_category: ResourceCategory.new,
     region: Region.new
@@ -98,6 +115,17 @@ RSpec.describe Ticket, type: :model do
       ticket2.save
       expect(Ticket.closed).to include(ticket)
       expect(Ticket.closed).to_not include(ticket2)
+    end
+    it 'returns all tickets for all organizations' do
+      ticket.organization = organization
+      ticket.save
+      ticket2.organization = organization
+      ticket2.save
+      ticket3.organization = nil
+      ticket3.save
+      expect(Ticket.all_organization).to include(ticket)
+      expect(Ticket.all_organization).to include(ticket2)
+      expect(Ticket.all_organization).to_not include(ticket3)
     end
   end
 
