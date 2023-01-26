@@ -26,4 +26,11 @@ RSpec.describe ResourceCategory, type: :model do
     expect(ResourceCategory.unspecified.name).to eq('Unspecified')
   end
 
+  it 'has a string representation that is its name' do
+    name = 'test_resource_category'
+    resource_category = ResourceCategory.new(name: name)
+    result = resource_category.to_s
+    expect(result).to eq(name)
+  end
+
 end
