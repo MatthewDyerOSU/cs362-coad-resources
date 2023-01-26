@@ -127,6 +127,20 @@ RSpec.describe Ticket, type: :model do
       expect(Ticket.all_organization).to include(ticket2)
       expect(Ticket.all_organization).to_not include(ticket3)
     end
+    it 'returns all open tickets for a specific organization' do
+      ticket.organization = organization
+      ticket.closed = false
+      ticket.save
+      expect(Ticket.organization(organization.id)).to include(ticket)
+      ticket2.organization = organization
+      ticket2.closed = true
+      ticket2.save
+      expect(Ticket.organization(organization.id)).to_not include(ticket2)
+      ticket3.organization = nil
+      ticket3.closed = false
+      ticket3.save
+      expect(Ticket.organization(organization.id)).to_not include(ticket3)
+    end
   end
 
 end
