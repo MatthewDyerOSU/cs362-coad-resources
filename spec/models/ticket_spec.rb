@@ -74,4 +74,13 @@ RSpec.describe Ticket, type: :model do
 
   end
 
+  describe 'scope methods' do
+    it 'returns open tickets' do
+      ticket.closed = false
+      ticket.organization = nil
+      ticket.save
+      expect(Ticket.open).to include(ticket)
+    end
+  end
+
 end
