@@ -15,8 +15,6 @@ RSpec.describe Ticket, type: :model do
   let (:region) { create(:region) }
   let (:resource_category) { create(:resource_category) }
   let (:ticket) { create(:ticket) }
-  let (:ticket2) { create(:ticket) }
-  let (:ticket3) { create(:ticket) }
 
   it 'responds to name' do
     expect(ticket).to respond_to(:name)
@@ -84,79 +82,53 @@ RSpec.describe Ticket, type: :model do
 
   describe 'scope methods' do
     it 'returns open tickets' do
-      ticket.closed = false
-      ticket.organization = nil
-      ticket.save
-      ticket2.closed = true
-      ticket2.save
+      ticket = create(:ticket, closed: false)
+      ticket2 = create(:ticket, closed: true)
       expect(Ticket.open).to include(ticket)
       expect(Ticket.open).to_not include(ticket2)
     end
     it 'returns closed tickets' do
-      ticket.closed = true
-      ticket.save
-      ticket2.closed = false
-      ticket2.save
+      ticket = create(:ticket, closed: true)
+      ticket2 = create(:ticket, closed: false)
       expect(Ticket.closed).to include(ticket)
       expect(Ticket.closed).to_not include(ticket2)
     end
     it 'returns all tickets for all organizations' do
-      ticket.organization = organization
-      ticket.save
-      ticket2.organization = organization
-      ticket2.save
-      ticket3.organization = nil
-      ticket3.save
+      ticket = create(:ticket, organization: organization)
+      ticket2 = create(:ticket, organization: organization)
+      ticket3 = create(:ticket, organization: nil)
       expect(Ticket.all_organization).to include(ticket)
       expect(Ticket.all_organization).to include(ticket2)
       expect(Ticket.all_organization).to_not include(ticket3)
     end
     it 'returns all open tickets for a specific organization' do
-      ticket.organization = organization
-      ticket.closed = false
-      ticket.save
+      ticket = create(:ticket, organization: organization, closed: false)
       expect(Ticket.organization(organization.id)).to include(ticket)
-      ticket2.organization = organization
-      ticket2.closed = true
-      ticket2.save
+      ticket2 = create(:ticket, organization: organization, closed: true)
       expect(Ticket.organization(organization.id)).to_not include(ticket2)
-      ticket3.organization = nil
-      ticket3.closed = false
-      ticket3.save
+      ticket3 = create(:ticket, organization: nil, closed: false)
       expect(Ticket.organization(organization.id)).to_not include(ticket3)
     end
     it 'returns all closed tickets for a specific organization' do
-      ticket.organization = organization
-      ticket.closed = true
-      ticket.save
+      ticket = create(:ticket, organization: organization, closed: true)
       expect(Ticket.closed_organization(organization.id)).to include(ticket)
-      ticket2.organization = organization
-      ticket2.closed = false
-      ticket2.save
+      ticket2 = create(:ticket, organization: organization, closed: false)
       expect(Ticket.closed_organization(organization.id)).to_not include(ticket2)
-      ticket3.organization = nil
-      ticket3.closed = true
-      ticket3.save
+      ticket3 = create(:ticket, organization: nil, closed: true)
       expect(Ticket.closed_organization(organization.id)).to_not include(ticket3)
     end
     it 'returns all tickets for a specific region' do
-      ticket.region = region
-      ticket.save
-      ticket2.region = region
-      ticket2.save
-      ticket3.region = nil
-      ticket3.save
+      ticket = create(:ticket, region: region)
+      ticket2 = create(:ticket, region: region)
+      ticket3 = create(:ticket, region: create(:region))
       expect(Ticket.region(region.id)).to include(ticket)
       expect(Ticket.region(region.id)).to include(ticket2)
       expect(Ticket.region(region.id)).to_not include(ticket3)
     end
     it 'returns all tickets for a specific resource category' do
-      ticket.resource_category = resource_category
-      ticket.save
-      ticket2.resource_category = resource_category
-      ticket2.save
-      ticket3.resource_category = nil
-      ticket3.save
+      ticket = create(:ticket, resource_category: resource_category)
+      ticket2 = create(:ticket, resource_category: resource_category)
+      ticket3 = create(:ticket, resource_category: create(:resource_category))
       expect(Ticket.resource_category(resource_category.id)).to include(ticket)
       expect(Ticket.resource_category(resource_category.id)).to include(ticket2)
       expect(Ticket.resource_category(resource_category.id)).to_not include(ticket3)
