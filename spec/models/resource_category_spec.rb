@@ -1,24 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe ResourceCategory, type: :model do
-
-  setup do
-    # let (:resource_category) { build(:resource_category) }
-    @rc_active = build(:resource_category)
-    @rc_inactive = build(:resource_category, :active => false)
-  end
+  let!(:active_resource_category) { create(:resource_category, active: true) } 
+  let!(:inactive_resource_category) { create(:resource_category, active: false) }
+  
+  it { should have_many :tickets }
+  it { should have_and_belong_to_many :organizations }
 
   it 'responds to name' do
-    expect(@rc_active).to respond_to(:name)
+    expect(active_resource_category).to respond_to(:name)
   end
 
   it 'responds to active' do
-    expect(@rc_active).to respond_to(:active)
+    expect(active_resource_category).to respond_to(:active)
   end
 
-  it { should have_many :tickets }
-
-  it { should have_and_belong_to_many :organizations }
+  
 
   describe 'validations' do
     it { should validate_presence_of :name }
@@ -51,20 +48,16 @@ RSpec.describe ResourceCategory, type: :model do
   end
 
   it 'is not active when deactivate member function is called' do
-    @rc_active.deactivate
-    expect(@rc_active.active).to be false
+    active_resource_category.deactivate
+    expect(active_resource_category.active).to be false
   end
 
   describe 'scope methods' do
     it "returns only active ResourceCategories" do
-      active_resource_category = create(:resource_category, active: true)
-      inactive_resource_category = create(:resource_category, active: false)
       expect(ResourceCategory.active).to eq([active_resource_category])
     end
 
     it "returns only deactivated ResourceCategories" do
-      active_resource_category = create(:resource_category, active: true)
-      inactive_resource_category = create(:resource_category, active: false)
       expect(ResourceCategory.inactive).to eq([inactive_resource_category])
     end
   end
