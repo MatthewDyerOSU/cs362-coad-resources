@@ -56,9 +56,14 @@ RSpec.describe ResourceCategory, type: :model do
     it "returns only active ResourceCategories" do
       active_resource_category = create(:resource_category, active: true)
       inactive_resource_category = create(:resource_category, active: false)
-
       expect(ResourceCategory.active).to eq([active_resource_category])
+    end
+
+    it "returns only deactivated ResourceCategories" do
+      active_resource_category = create(:resource_category, active: true)
+      inactive_resource_category = create(:resource_category, active: false)
+      expect(ResourceCategory.inactive).to eq([inactive_resource_category])
+    end
   end
-end
 
 end
