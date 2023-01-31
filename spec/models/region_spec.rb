@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Region, type: :model do
 
-  let (:region) { Region.new }
+  let (:region) { create(:region) }
 
   it "has a name" do
     expect(region).to respond_to(:name)
@@ -10,7 +10,7 @@ RSpec.describe Region, type: :model do
 
   it "has a string representation that is its name" do
     name = 'Mt. Hood'
-    region = Region.new(name: name)
+    region = create(:region, name: name)
     result = region.to_s
     expect(result).to eq(name)
   end
@@ -22,13 +22,6 @@ RSpec.describe Region, type: :model do
   it { should validate_length_of(:name).is_at_least(1).is_at_most(255).on(:create) }
 
   it { should validate_uniqueness_of(:name).case_insensitive }
-
-  it "has a string representation that is its name" do
-    name = 'Mt. Hood'
-    region = Region.new(name: name)
-    result = region.to_s
-    expect(result).to eq(name)
-  end
 
   describe 'unspecified region' do
 
@@ -46,7 +39,7 @@ RSpec.describe Region, type: :model do
     end
 
     it 'finds an existing region if one exists' do
-      test_region = Region.create!(name: 'Unspecified')
+      test_region = create(:region, name: 'Unspecified')
       region = Region.unspecified
       expect(region).to eq test_region
     end
