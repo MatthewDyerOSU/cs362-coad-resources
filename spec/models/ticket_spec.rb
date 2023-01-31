@@ -12,37 +12,11 @@ RSpec.describe Ticket, type: :model do
       secondary_phone: '+1 408-402-1235',
     )
   }
-  let (:region) {
-    Region.create!(
-      name: 'Example Region',
-    )
-  }
-  let (:resource_category) {
-    ResourceCategory.create!(
-      name: 'Example Resource Category',
-    )
-  }
-  let (:ticket) { Ticket.new(
-    name: 'Test Name',
-    phone: '+1 408-402-1234',
-    description: 'Test Description',
-    resource_category: ResourceCategory.new,
-    region: Region.new
-  ) }
-  let (:ticket2) { Ticket.new(
-    name: 'Test Name 2',
-    phone: '+1 408-402-1235',
-    description: 'Test Description',
-    resource_category: ResourceCategory.new,
-    region: Region.new
-  ) }
-  let (:ticket3) { Ticket.new(
-    name: 'Test Name 3',
-    phone: '+1 408-402-1236',
-    description: 'Test Description',
-    resource_category: ResourceCategory.new,
-    region: Region.new
-  ) }
+  let (:region) { create(:region) }
+  let (:resource_category) { create(:resource_category) }
+  let (:ticket) { create(:ticket) }
+  let (:ticket2) { create(:ticket) }
+  let (:ticket3) { create(:ticket) }
 
   it 'responds to name' do
     expect(ticket).to respond_to(:name)
@@ -87,21 +61,21 @@ RSpec.describe Ticket, type: :model do
 
   describe 'instance methods' do
     it 'is open when not closed' do
-      ticket = Ticket.new(closed: false)
+      ticket = build(:ticket, closed: false)
       expect(ticket.open?).to be true
-      ticket = Ticket.new(closed: true)
+      ticket = build(:ticket, closed: true)
       expect(ticket.open?).to be false
     end
 
     it 'is captured when organization is present' do
-      ticket = Ticket.new(organization: nil)
+      ticket = build(:ticket, organization: nil)
       expect(ticket.captured?).to be false
       ticket = Ticket.new(organization: Organization.new)
       expect(ticket.captured?).to be true
     end
 
     it 'has a string representation that follows the pattern "Ticket <id>"' do
-      ticket = Ticket.new(id: 1)
+      ticket = build(:ticket, id: 1)
       result = ticket.to_s
       expect(result).to eq('Ticket 1')
     end
