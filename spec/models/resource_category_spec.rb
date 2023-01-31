@@ -41,7 +41,7 @@ RSpec.describe ResourceCategory, type: :model do
   end
 
   it 'is active when activate member function is called' do
-    resource_category = ResourceCategory.new
+    resource_category = create(:resource_category, active: false)
     resource_category.activate
     expect(resource_category.active).to be true
   end
