@@ -28,10 +28,8 @@ RSpec.describe ResourceCategory, type: :model do
   end
 
   it 'is inactive when resource_category is not active' do
-    resource_category = ResourceCategory.new(active: false)
-    expect(resource_category.inactive?).to be true
-    resource_category = ResourceCategory.new(active: true)
-    expect(resource_category.inactive?).to be false
+    expect(inactive_resource_category.inactive?).to be true
+    expect(active_resource_category.inactive?).to be false
   end
 
   it 'is active when activate member function is called' do
