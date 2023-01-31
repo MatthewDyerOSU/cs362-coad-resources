@@ -2,16 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
 
-  let (:organization) {
-    Organization.create!(
-      email: 'example@example.org',
-      name: 'Example Organization',
-      phone: '+1 408-402-1234',
-      primary_name: 'Example Primary Name',
-      secondary_name: 'Example Secondary Name',
-      secondary_phone: '+1 408-402-1235',
-    )
-  }
+  let (:organization) { create(:organization) }
   let (:region) { create(:region) }
   let (:resource_category) { create(:resource_category) }
   let (:ticket) { create(:ticket) }
@@ -68,7 +59,7 @@ RSpec.describe Ticket, type: :model do
     it 'is captured when organization is present' do
       ticket = build(:ticket, organization: nil)
       expect(ticket.captured?).to be false
-      ticket = Ticket.new(organization: Organization.new)
+      ticket = build(organization: organization)
       expect(ticket.captured?).to be true
     end
 

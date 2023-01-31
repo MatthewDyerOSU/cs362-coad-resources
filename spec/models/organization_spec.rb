@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
 
-  let (:organization) { Organization.new}
+  let (:organization) { create(:organization) }
 
   it 'has a name' do
     expect(organization).to respond_to(:name)
@@ -94,13 +94,13 @@ RSpec.describe Organization, type: :model do
 
   it "has an invalid email" do
     email = "bademail.com"
-    organization = Organization.new(email: email)
+    organization = build(:organization, email: email)
     expect(organization).to_not allow_value(email).for(:email)
   end
 
   it "has a valid email" do
     email = "valid@email.com"
-    organization = Organization.new(email: email)
+    organization = build(:organization, email: email)
     expect(organization).to allow_value(email).for(:email)
   end
 
@@ -111,7 +111,7 @@ RSpec.describe Organization, type: :model do
 
   it 'has a string representation that is its name' do
     name = 'test_org'
-    organization = Organization.new(name: name)
+    organization = build(:organization, name: name)
     result = organization.to_s
     expect(result).to eq(name)
   end
@@ -121,27 +121,20 @@ RSpec.describe Organization, type: :model do
   end
 
   it 'does not change the set status to default status' do
-    organization = Organization.new(status: 'approved')
+    organization = build(:organization, status: 'approved')
     expect(organization.status).to eq('approved')
   end
 
   it 'sets status to approved with approve member function' do
-    organization = Organization.new
+    organization = build(:organization, status: 'rejected')
     organization.approve
     expect(organization.status).to eq('approved')
   end
 
   it 'sets status to rejected with reject member function' do
-    organization = Organization.new
+    organization = build(:organization, status: 'approved')
     organization.reject
     expect(organization.status).to eq('rejected')
   end
-
-
-
-
-
-
-
 
 end
