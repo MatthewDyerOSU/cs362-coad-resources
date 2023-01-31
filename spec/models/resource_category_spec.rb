@@ -2,14 +2,18 @@ require 'rails_helper'
 
 RSpec.describe ResourceCategory, type: :model do
 
-  let (:resource_category) { build(:resource_category) }
+  setup do
+    # let (:resource_category) { build(:resource_category) }
+    @rc_active = build(:resource_category)
+    @rc_inactive = build(:resource_category, :active => false)
+  end
 
   it 'responds to name' do
-    expect(resource_category).to respond_to(:name)
+    expect(@rc_active).to respond_to(:name)
   end
 
   it 'responds to active' do
-    expect(resource_category).to respond_to(:active)
+    expect(@rc_active).to respond_to(:active)
   end
 
   it { should have_many :tickets }
@@ -47,9 +51,8 @@ RSpec.describe ResourceCategory, type: :model do
   end
 
   it 'is not active when deactivate member function is called' do
-    # resource_category = create(:resource_category, active: true)
-    resource_category.deactivate
-    expect(resource_category.active).to be false
+    @rc_active.deactivate
+    expect(@rc_active.active).to be false
   end
 
   describe 'scope methods' do
