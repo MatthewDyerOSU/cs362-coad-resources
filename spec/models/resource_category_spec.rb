@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ResourceCategory, type: :model do
 
-  let (:resource_category) { ResourceCategory.new }
+  let (:resource_category) { build(:resource_category) }
 
   it 'responds to name' do
     expect(resource_category).to respond_to(:name)
@@ -52,12 +52,13 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category.active).to be false
   end
 
-  # describe 'scope methods' do
-  #   it 'returns active resource categories' do
-  #     resource_category.active = true
-  #     resource_category.save
-  #     expect(ResourceCategory.active).to include(resource_category)
-  #   end
-  # end
+  describe 'scope methods' do
+    it "returns only active ResourceCategories" do
+      active_resource_category = create(:resource_category, active: true)
+      inactive_resource_category = create(:resource_category, active: false)
+
+      expect(ResourceCategory.active).to eq([active_resource_category])
+  end
+end
 
 end
