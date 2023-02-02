@@ -3,7 +3,7 @@
 #
 class Organization < ApplicationRecord
 
-  attr_accessor :agreement_one, :agreement_two, :agreement_three, :agreement_four, :agreement_five, :agreement_six, :agreement_seven, :agreement_eight
+  attr_accessor :agreement_one, :agreement_two, :agreement_three, :agreement_four, :agreement_five, :agreement_six, :agreement_seven, :agreement_eight, :optional
 
   enum status: [:approved, :submitted, :rejected, :locked]
   enum transportation: [:yes, :no, :maybe]
@@ -37,6 +37,10 @@ class Organization < ApplicationRecord
 
   def to_s
     name
+  end
+
+  def optional=(value)
+    @optional = value
   end
 
 end
