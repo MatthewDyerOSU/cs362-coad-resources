@@ -40,10 +40,6 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
-group :development, :production do
-  gem 'webpacker'
-end
-
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'database_cleaner'
