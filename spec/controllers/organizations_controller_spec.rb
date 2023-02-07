@@ -18,6 +18,18 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(response).to redirect_to(new_user_session_path)
       end
     end
+    describe "GET #show" do
+      it "redirects to login page" do
+        get :show, params: { id: 1 }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+    describe "GET #edit" do
+      it "redirects to login page" do
+        get :edit, params: { id: 1 }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
   end
 
   describe "logged in as user with organization" do
