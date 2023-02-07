@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Region, type: :model do
 
-  let (:region) { create(:region) }
+  let (:region) { build_stubbed(:region) }
 
   it "has a name" do
     expect(region).to respond_to(:name)
@@ -10,7 +10,7 @@ RSpec.describe Region, type: :model do
 
   it "has a string representation that is its name" do
     name = 'Mt. Hood'
-    region = create(:region, name: name)
+    region = build(:region, name: name)
     result = region.to_s
     expect(result).to eq(name)
   end

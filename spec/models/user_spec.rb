@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let (:user) { create(:user) }
+  let (:user) { build_stubbed(:user) }
 
   it 'has an email' do
     expect(user).to respond_to(:email)
@@ -66,7 +66,7 @@ RSpec.describe User, type: :model do
 
   it 'has a string representation that is its email' do
     email = 'eve@eavesdrop.org'
-    user = create(:user, email: email)
+    user = build(:user, email: email)
     result = user.to_s
     expect(result).to eq(email)
   end

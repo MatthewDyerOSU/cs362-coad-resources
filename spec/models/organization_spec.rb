@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
 
-  let (:organization) { create(:organization) }
+  let (:organization) { build_stubbed(:organization) }
 
   it 'has a name' do
     expect(organization).to respond_to(:name)

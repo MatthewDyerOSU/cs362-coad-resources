@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ResourceCategory, type: :model do
-  let!(:active_resource_category) { create(:resource_category, active: true) } 
+  let!(:active_resource_category) { create(:resource_category, active: true) }
   let!(:inactive_resource_category) { create(:resource_category, active: false) }
-  
+
   it { should have_many :tickets }
   it { should have_and_belong_to_many :organizations }
 
