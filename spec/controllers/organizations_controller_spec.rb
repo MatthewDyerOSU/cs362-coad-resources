@@ -42,6 +42,18 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(response).to redirect_to(new_user_session_path)
       end
     end
+    describe "PATCH #approve" do
+      it "redirects to login page" do
+        patch :approve, params: { id: 1 }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+    describe "PATCH #reject" do
+      it "redirects to login page" do
+        patch :reject, params: { id: 1 }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
   end
 
   describe "logged in as user with organization" do
