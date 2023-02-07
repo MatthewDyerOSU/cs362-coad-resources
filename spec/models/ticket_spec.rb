@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
 
-  let (:organization) { create(:organization) }
-  let (:region) { create(:region) }
-  let (:resource_category) { create(:resource_category) }
-  let (:ticket) { create(:ticket) }
+  let (:organization) { build_stubbed(:organization) }
+  let (:region) { build_stubbed(:region) }
+  let (:resource_category) { build_stubbed(:resource_category) }
+  let (:ticket) { build_stubbed(:ticket) }
 
   it 'responds to name' do
     expect(ticket).to respond_to(:name)
@@ -59,7 +59,7 @@ RSpec.describe Ticket, type: :model do
     it 'is captured when organization is present' do
       ticket = build(:ticket, organization: nil)
       expect(ticket.captured?).to be false
-      ticket = build(organization: organization)
+      ticket = build(:ticket, organization: organization)
       expect(ticket.captured?).to be true
     end
 
