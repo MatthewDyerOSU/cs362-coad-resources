@@ -12,8 +12,13 @@ RSpec.describe DashboardController, type: :controller do
     end
 
     describe "when logged in" do
-      it "returns http success" do
+      it "returns http success for regular user" do
         sign_in create(:user)
+        get :index
+        expect(response).to have_http_status(:success)
+      end
+      it "returns http success for admin user" do
+        sign_in create(:user, :admin)
         get :index
         expect(response).to have_http_status(:success)
       end
