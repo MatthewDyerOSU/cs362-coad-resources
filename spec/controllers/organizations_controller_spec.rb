@@ -139,6 +139,12 @@ RSpec.describe OrganizationsController, type: :controller do
         user_with_org.organization.update(status: :approved)
         expect(patch :update, params: { id: 1, organization: {name: "foo"} }).to redirect_to(organization_path(user_with_org.organization))
       end
+      it "renders :edit if update fails" do
+        sign_in user_with_org
+        user_with_org.organization.update(status: :approved)
+        # an empty name is invalid.
+        expect(patch :update, params: { id: 1, organization: { name: "" } }).to render_template(:edit)
+      end
     end
     describe "logged in as user without organization" do
       it "redirects to dashboard" do
@@ -172,9 +178,9 @@ RSpec.describe OrganizationsController, type: :controller do
         _ = admin_user
         expect(post :create, params: { organization: build(:organization).attributes }).to redirect_to(organization_application_submitted_path)
       end
-      it "it is 'successful' when create data is invalid" do
+      it "it renders :new when create data is invalid" do
         sign_in user_without_org
-        expect(post :create, params: { organization: {name: "foo"} }).to be_successful
+        expect(post :create, params: { organization: {name: "foo"} }).to render_template(:new)
       end
     end
     describe "logged in as admin" do
