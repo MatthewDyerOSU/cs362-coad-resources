@@ -128,6 +128,18 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(patch :update, params: { id: 1 }).to redirect_to(new_user_session_path)
       end
     end
+    describe "logged in as user with organization" do
+      it "redirects to dashboard if not approved" do
+        sign_in user_with_org
+        user_with_org.organization.update(status: :rejected)
+        expect(patch :update, params: { id: 1, organization: {name: "foo"} }).to redirect_to(dashboard_path)
+      end
+      it "redirects to the organization page if approved" do
+        sign_in user_with_org
+        user_with_org.organization.update(status: :approved)
+        expect(patch :update, params: { id: 1, organization: {name: "foo"} }).to redirect_to(organization_path(user_with_org.organization))
+      end
+    end
   end
 
   describe "POST #create" do
