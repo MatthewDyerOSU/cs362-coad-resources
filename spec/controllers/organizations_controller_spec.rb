@@ -167,9 +167,14 @@ RSpec.describe OrganizationsController, type: :controller do
       end
     end
     describe "logged in as user without organization" do
-      it "is successful" do
+      it "redirects to submitted path when successful" do
         sign_in user_without_org
-        expect(post :create, params: { organization: { name: "test" } }).to be_successful
+        _ = admin_user
+        expect(post :create, params: { organization: build(:organization).attributes }).to redirect_to(organization_application_submitted_path)
+      end
+      it "it is 'successful' when create data is invalid" do
+        sign_in user_without_org
+        expect(post :create, params: { organization: {name: "foo"} }).to be_successful
       end
     end
     describe "logged in as admin" do
