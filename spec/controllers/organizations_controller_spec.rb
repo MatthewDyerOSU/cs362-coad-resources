@@ -82,6 +82,12 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(get :show, params: { id: 1 }).to redirect_to(dashboard_path)
       end
     end
+    describe "logged in as admin" do
+      it "is successful" do
+        sign_in admin_user
+        expect(get :show, params: { id: 1 }).to be_successful
+      end
+    end
   end
 
   describe "GET #edit" do
