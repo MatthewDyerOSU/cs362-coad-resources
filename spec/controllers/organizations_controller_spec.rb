@@ -69,16 +69,17 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "GET #show" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :new
+        get :show, params: { id: 1 }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
+
   end
 
   describe "GET #edit" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :new
+        get :edit, params: { id: 1 }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -87,7 +88,7 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "PATCH #update" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :new
+        patch :update, params: { id: 1 }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -96,25 +97,25 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "POST #create" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :new
+        post :create
         expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
 
-  describe "PATCH #approve" do
+  describe "POST #approve" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :new
+        post :approve, params: { id: 1 }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
 
-  describe "PATCH #reject" do
+  describe "POST #reject" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :new
+        post :reject, params: { id: 1 }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
