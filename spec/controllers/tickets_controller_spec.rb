@@ -46,7 +46,15 @@ RSpec.describe TicketsController, type: :controller do
                 expect(response).to have_http_status(:success)
             end
         end
-
     end
 
+    describe "POST #capture" do
+        describe "User without organization" do
+            it "redirects to dashboard" do
+                sign_in user_without_org
+                post :capture, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
+    end
 end
