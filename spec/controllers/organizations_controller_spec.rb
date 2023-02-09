@@ -160,6 +160,24 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(post :create).to redirect_to(new_user_session_path)
       end
     end
+    describe "logged in as user with organization" do
+      it "redirects to dashboard" do
+        sign_in user_with_org
+        expect(post :create).to redirect_to(dashboard_path)
+      end
+    end
+    describe "logged in as user without organization" do
+      it "is successful" do
+        sign_in user_without_org
+        expect(post :create, params: { organization: { name: "test" } }).to be_successful
+      end
+    end
+    describe "logged in as admin" do
+      it "redirects to dashboard" do
+        sign_in admin_user
+        expect(post :create).to redirect_to(dashboard_path)
+      end
+    end
   end
 
   describe "POST #approve" do
