@@ -96,6 +96,18 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(get :edit, params: { id: 1 }).to redirect_to(new_user_session_path)
       end
     end
+    describe "logged in as user with organization" do
+      it "redirects to dashboard if not approved" do
+        sign_in user_with_org
+        user_with_org.organization.update(status: :rejected)
+        expect(get :edit, params: { id: 1 }).to redirect_to(dashboard_path)
+      end
+      it "is successful if approved" do
+        sign_in user_with_org
+        user_with_org.organization.update(status: :approved)
+        expect(get :edit, params: { id: 1 }).to be_successful
+      end
+    end
   end
 
   describe "PATCH #update" do
