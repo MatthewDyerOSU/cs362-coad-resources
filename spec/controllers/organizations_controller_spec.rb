@@ -197,6 +197,12 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(post :approve, params: { id: 1 }).to redirect_to(new_user_session_path)
       end
     end
+    describe "logged in as user" do
+      it "redirects to dashboard" do
+        sign_in user_with_org
+        expect(post :approve, params: { id: 1 }).to redirect_to(dashboard_path)
+      end
+    end
   end
 
   describe "POST #reject" do
