@@ -76,6 +76,12 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(get :show, params: { id: 1 }).to be_successful
       end
     end
+    describe "logged in as user without organization" do
+      it "redirects to dashboard" do
+        sign_in user_without_org
+        expect(get :show, params: { id: 1 }).to redirect_to(dashboard_path)
+      end
+    end
   end
 
   describe "GET #edit" do
