@@ -140,6 +140,12 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(patch :update, params: { id: 1, organization: {name: "foo"} }).to redirect_to(organization_path(user_with_org.organization))
       end
     end
+    describe "logged in as user without organization" do
+      it "redirects to dashboard" do
+        sign_in user_without_org
+        expect(patch :update, params: { id: 1, organization: {name: "foo"} }).to redirect_to(dashboard_path)
+      end
+    end
   end
 
   describe "POST #create" do
