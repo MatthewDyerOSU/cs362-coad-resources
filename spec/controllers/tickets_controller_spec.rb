@@ -56,5 +56,13 @@ RSpec.describe TicketsController, type: :controller do
                 expect(response).to redirect_to(dashboard_path)
             end
         end
+        
+        describe "User with approved organization" do
+            it "has http status of success" do
+                sign_in user_with_org
+                post :capture, params: { id: ticket.id }
+                expect(response).to have_http_status(:success)
+            end
+        end
     end
 end
