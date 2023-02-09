@@ -4,6 +4,7 @@ RSpec.describe TicketsController, type: :controller do
    
     let (:ticket) { create(:ticket) }
     let (:user) { create(:user) }
+    let (:admin_user) { create(:user, :admin) }
 
     describe "GET #new" do
         it "has http status of success" do
@@ -20,12 +21,20 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe "GET #show" do
-        it "has http status of success" do
-            sign_in user
-            get :show, params: { id: ticket.id } 
-            # expect(response).to have_http_status(:success)
-            # expect(response).to redirect_to(ticket_path)
-            expect(response).to redirect_to(dashboard_path)
+        describe "User without organization" do
+            it "redirects to dashboard" do
+                sign_in user
+                get :show, params: { id: ticket.id } 
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
+
+        describe "User as admin" do
+            it "has http status of success" do
+                sign_in admin_user
+                get :show, params: { id: ticket.id }
+                expect(response).to have_http_status(:success)
+            end
         end
     end
 
