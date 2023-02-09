@@ -114,6 +114,12 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(get :edit, params: { id: 1 }).to redirect_to(dashboard_path)
       end
     end
+    describe "logged in as admin" do
+      it "redirects to dashboard" do
+        sign_in admin_user
+        expect(get :edit, params: { id: 1 }).to redirect_to(dashboard_path)
+      end
+    end
   end
 
   describe "PATCH #update" do
