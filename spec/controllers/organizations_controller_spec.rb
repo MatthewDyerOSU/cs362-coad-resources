@@ -203,6 +203,12 @@ RSpec.describe OrganizationsController, type: :controller do
         expect(post :approve, params: { id: 1 }).to redirect_to(dashboard_path)
       end
     end
+    describe "logged in as admin" do
+      it "redirects to the organization index page" do
+        sign_in admin_user
+        expect(post :approve, params: { id: 1 }).to redirect_to(organizations_path)
+      end
+    end
   end
 
   describe "POST #reject" do
