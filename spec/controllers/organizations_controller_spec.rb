@@ -9,29 +9,25 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "GET #new" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :new
-        expect(response).to redirect_to(new_user_session_path)
+        expect(get :new).to redirect_to(new_user_session_path)
       end
     end
     describe "logged in as user with organization" do
       it "redirects to dashboard" do
         sign_in user_with_org
-        get :new
-        expect(response).to redirect_to(dashboard_path)
+        expect(get :new).to redirect_to(dashboard_path)
       end
     end
     describe "logged in as user without organization" do
-      it "returns http success" do
+      it "is successful" do
         sign_in user_without_org
-        get :new
-        expect(response).to have_http_status(:success)
+        expect(get :new).to be_successful
       end
     end
     describe "logged in as admin" do
       it "redirects to dashboard" do
         sign_in admin_user
-        get :new
-        expect(response).to redirect_to(dashboard_path)
+        expect(get :new).to redirect_to(dashboard_path)
       end
     end
   end
@@ -39,29 +35,25 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "GET #index" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :index
-        expect(response).to redirect_to(new_user_session_path)
+        expect(get :index).to redirect_to(new_user_session_path)
       end
     end
     describe "logged in as user with organization" do
-      it "returns http success" do
+      it "is successful" do
         sign_in user_with_org
-        get :index
-        expect(response).to have_http_status(:success)
+        expect(get :index).to be_successful
       end
     end
     describe "logged in as user without organization" do
-      it "returns http success" do
+      it "is successful" do
         sign_in user_without_org
-        get :index
-        expect(response).to have_http_status(:success)
+        expect(get :index).to be_successful
       end
     end
     describe "logged in as admin" do
-      it "returns http success" do
+      it "is successful" do
         sign_in admin_user
-        get :index
-        expect(response).to have_http_status(:success)
+        expect(get :index).to be_successful
       end
     end
   end
@@ -69,22 +61,19 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "GET #show" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :show, params: { id: 1 }
-        expect(response).to redirect_to(new_user_session_path)
+        expect(get :show, params: { id: 1 }).to redirect_to(new_user_session_path)
       end
     end
     describe "logged in as user with organization" do
       it "redirects to dashboard if not approved" do
         sign_in user_with_org
         user_with_org.organization.update(status: :rejected)
-        get :show, params: { id: 1 }
-        expect(response).to redirect_to(dashboard_path)
+        expect(get :show, params: { id: 1 }).to redirect_to(dashboard_path)
       end
-      it "returns http success if approved" do
+      it "is successful if approved" do
         sign_in user_with_org
         user_with_org.organization.update(status: :approved)
-        get :show, params: { id: 1 }
-        expect(response).to have_http_status(:success)
+        expect(get :show, params: { id: 1 }).to be_successful
       end
     end
   end
@@ -92,8 +81,7 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "GET #edit" do
     describe "not logged in" do
       it "redirects to login page" do
-        get :edit, params: { id: 1 }
-        expect(response).to redirect_to(new_user_session_path)
+        expect(get :edit, params: { id: 1 }).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -101,8 +89,7 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "PATCH #update" do
     describe "not logged in" do
       it "redirects to login page" do
-        patch :update, params: { id: 1 }
-        expect(response).to redirect_to(new_user_session_path)
+        expect(patch :update, params: { id: 1 }).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -110,8 +97,7 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "POST #create" do
     describe "not logged in" do
       it "redirects to login page" do
-        post :create
-        expect(response).to redirect_to(new_user_session_path)
+        expect(post :create).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -119,8 +105,7 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "POST #approve" do
     describe "not logged in" do
       it "redirects to login page" do
-        post :approve, params: { id: 1 }
-        expect(response).to redirect_to(new_user_session_path)
+        expect(post :approve, params: { id: 1 }).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -128,8 +113,7 @@ RSpec.describe OrganizationsController, type: :controller do
   describe "POST #reject" do
     describe "not logged in" do
       it "redirects to login page" do
-        post :reject, params: { id: 1 }
-        expect(response).to redirect_to(new_user_session_path)
+        expect(post :reject, params: { id: 1 }).to redirect_to(new_user_session_path)
       end
     end
   end
