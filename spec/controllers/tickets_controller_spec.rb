@@ -55,6 +55,13 @@ RSpec.describe TicketsController, type: :controller do
                 expect(response).to have_http_status(:success)
             end
         end
+
+        describe "DELETE #destroy" do
+            it "redirects to dashboard#tickets" do
+                delete :destroy, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path << '#tickets')
+            end
+        end
     end
 
     describe "Non admin user without organization" do
