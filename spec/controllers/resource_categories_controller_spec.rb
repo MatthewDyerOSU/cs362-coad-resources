@@ -53,6 +53,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 expect(response).to redirect_to(dashboard_path)
             end
         end
+
+        describe "GET #new" do
+            it "redirects to dashboard" do
+                get :new
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
     end
 
     describe "User without approved organization" do
