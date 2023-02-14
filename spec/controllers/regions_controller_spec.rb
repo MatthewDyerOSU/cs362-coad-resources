@@ -69,6 +69,17 @@ RSpec.describe RegionsController, type: :controller do
         expect(get :edit, params: { id: region.id }).to be_successful
       end
     end
+
+    describe('PATCH #update') do
+      it('redirects to region for valid params') do
+        region = create(:region)
+        expect(patch :update, params: { id: region.id, region: { name: 'New Name' } }).to redirect_to(region)
+      end
+      it('renders :edit for invalid params') do
+        region = create(:region)
+        expect(patch :update, params: { id: region.id, region: { name: nil } }).to render_template(:edit)
+      end
+    end
   end
 
 end
