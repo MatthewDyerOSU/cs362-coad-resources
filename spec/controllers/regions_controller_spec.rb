@@ -36,8 +36,15 @@ RSpec.describe RegionsController, type: :controller do
     end
 
     describe('GET #index') do
-      it('is successful for index') do
+      it('is successful') do
         expect(get :index).to be_successful
+      end
+    end
+
+    describe('GET #show') do
+      it('is successful') do
+        region = create(:region)
+        expect(get :show, params: { id: region.id }).to be_successful
       end
     end
   end
