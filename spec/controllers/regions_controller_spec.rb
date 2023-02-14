@@ -53,6 +53,12 @@ RSpec.describe RegionsController, type: :controller do
         expect(get :new).to be_successful
       end
     end
+
+    describe('POST #create') do
+      it('redirects to regions index for valid params') do
+        expect(post :create, params: { region: build(:region).attributes }).to redirect_to(regions_path)
+      end
+    end
   end
 
 end
