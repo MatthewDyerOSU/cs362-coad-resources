@@ -96,6 +96,13 @@ RSpec.describe TicketsController, type: :controller do
                 expect(response).to redirect_to(dashboard_path)
             end
         end
+
+        describe "PATCH #close" do
+            it "redirects to dashboard" do
+                post :close, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
     end
 
     describe "Non admin user with approved organization" do
