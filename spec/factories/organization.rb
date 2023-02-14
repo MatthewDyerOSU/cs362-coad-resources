@@ -1,9 +1,11 @@
-counter = 0
 FactoryBot.define do
   factory :organization do
-    counter += 1
-    email { "#{Faker::Internet.email}" }
-    name { "#{Faker::Company.name}#{counter}" }
+    sequence(:email) do |n|
+      "#{n}#{Faker::Internet.email}"
+    end
+    sequence(:name) do |n|
+      "#{Faker::Company.name}#{n}"
+    end
     description { Faker::Lorem.sentence }
     phone { Faker::PhoneNumber.phone_number }
     primary_name { Faker::Name.name }
