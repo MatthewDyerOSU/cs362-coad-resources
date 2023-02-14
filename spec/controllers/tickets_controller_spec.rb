@@ -111,7 +111,6 @@ RSpec.describe TicketsController, type: :controller do
             end
         end
 
-        # needs to be fixed! is redirecting to dashboard_path instead of expected path below
         describe "DELETE #destroy" do
             it "redirects to dashboard#tickets" do
                 delete :destroy, params: { id: ticket.id }
@@ -164,6 +163,13 @@ RSpec.describe TicketsController, type: :controller do
             it "has http status of success" do
                 post :close, params: { id: ticket.id }
                 expect(response).to have_http_status(:success)
+            end
+        end
+
+        describe "DELETE #destroy" do
+            it "redirects to dashboard#tickets" do
+                delete :destroy, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path)
             end
         end
     end
