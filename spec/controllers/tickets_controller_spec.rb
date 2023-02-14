@@ -110,6 +110,14 @@ RSpec.describe TicketsController, type: :controller do
                 expect(response).to redirect_to(dashboard_path)
             end
         end
+
+        # needs to be fixed! is redirecting to dashboard_path instead of expected path below
+        describe "DELETE #destroy" do
+            it "redirects to dashboard#tickets" do
+                delete :destroy, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path << '#tickets')
+            end
+        end
     end
 
     describe "Non admin user with approved organization" do
