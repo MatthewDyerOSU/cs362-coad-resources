@@ -11,5 +11,15 @@ FactoryBot.define do
     trait :admin do
       role { :admin }
     end
+
+    trait :approved_org do
+      role { :organization }
+      association :organization, factory: :organization, status: :approved
+    end
+
+    trait :unapproved_org do
+      role { :organization }
+      association :organization, factory: :organization, status: :submitted
+    end
   end
 end
