@@ -33,6 +33,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 expect(response).to have_http_status(:success)
             end
         end
+
+        describe "POST #create" do
+            it "redirects to resource_categories_path" do
+                post :create, params: { resource_category: { name: "Sample Resource Category" } }
+                expect(response).to redirect_to(resource_categories_path)
+            end
+        end
     end
 
     describe "User with approved organization" do
