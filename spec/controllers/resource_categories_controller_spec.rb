@@ -26,6 +26,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 expect(response).to have_http_status(:success)
             end
         end
+
+        describe "GET #new" do
+            it "has http status of success" do
+                get :new
+                expect(response).to have_http_status(:success)
+            end
+        end
     end
 
     describe "User with approved organization" do
