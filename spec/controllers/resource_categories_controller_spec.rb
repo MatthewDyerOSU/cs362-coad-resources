@@ -21,5 +21,16 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         end
     end
 
+    describe "User with approved organization" do
+        before(:each) do
+            sign_in user_with_org
+        end
 
+        describe "GET #index" do
+            it "redirects to dashboard" do
+                get :index
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
+    end
 end
