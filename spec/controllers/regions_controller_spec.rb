@@ -80,6 +80,13 @@ RSpec.describe RegionsController, type: :controller do
         expect(patch :update, params: { id: region.id, region: { name: nil } }).to render_template(:edit)
       end
     end
+
+    describe('#destroy') do
+      it('redirects to regions index') do
+        region = create(:region)
+        expect(delete :destroy, params: { id: region.id }).to redirect_to(regions_path)
+      end
+    end
   end
 
 end
