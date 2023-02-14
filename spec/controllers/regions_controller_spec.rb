@@ -62,6 +62,13 @@ RSpec.describe RegionsController, type: :controller do
         expect(post :create, params: { region: { name: nil } }).to render_template(:new)
       end
     end
+
+    describe('GET #edit') do
+      it('is successful') do
+        region = create(:region)
+        expect(get :edit, params: { id: region.id }).to be_successful
+      end
+    end
   end
 
 end
