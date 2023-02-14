@@ -58,6 +58,9 @@ RSpec.describe RegionsController, type: :controller do
       it('redirects to regions index for valid params') do
         expect(post :create, params: { region: build(:region).attributes }).to redirect_to(regions_path)
       end
+      it('renders :new for invalid params') do
+        expect(post :create, params: { region: { name: nil } }).to render_template(:new)
+      end
     end
   end
 
