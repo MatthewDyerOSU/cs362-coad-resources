@@ -123,5 +123,12 @@ RSpec.describe TicketsController, type: :controller do
                 expect(response).to have_http_status(:success)
             end
         end
+
+        describe "POST #release" do
+            it "redirects to dashboard" do
+                post :release, params: { id: ticket.id }
+                expect(response).to have_http_status(:success)
+            end
+        end
     end
 end
