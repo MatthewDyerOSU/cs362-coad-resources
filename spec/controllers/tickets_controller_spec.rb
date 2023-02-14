@@ -75,6 +75,13 @@ RSpec.describe TicketsController, type: :controller do
             sign_in user_with_org
         end
 
+        describe "GET #new" do
+            it "has http status of success" do
+                get :new
+                expect(response).to have_http_status(:success)
+            end
+        end
+
         describe "GET #show" do
             it "has http status of success" do
                 get :show, params: { id: ticket.id }
