@@ -19,11 +19,31 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 expect(response).to have_http_status(:success)
             end
         end
+
+        describe "GET #show" do
+            it "has http status of success" do
+                get :show, params: { id: resource_category.id }
+                expect(response).to have_http_status(:success)
+            end
+        end
     end
 
     describe "User with approved organization" do
         before(:each) do
             sign_in user_with_org
+        end
+
+        describe "GET #index" do
+            it "redirects to dashboard" do
+                get :index
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
+    end
+
+    describe "User without approved organization" do
+        before(:each) do
+            sign_in user_without_org
         end
 
         describe "GET #index" do
