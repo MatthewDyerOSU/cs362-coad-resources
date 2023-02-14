@@ -144,5 +144,12 @@ RSpec.describe TicketsController, type: :controller do
                 expect(response).to have_http_status(:success)
             end
         end
+
+        describe "PATCH #close" do
+            it "has http status of success" do
+                post :close, params: { id: ticket.id }
+                expect(response).to have_http_status(:success)
+            end
+        end
     end
 end
