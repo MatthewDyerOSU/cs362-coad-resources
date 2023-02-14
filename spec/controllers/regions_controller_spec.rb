@@ -47,6 +47,12 @@ RSpec.describe RegionsController, type: :controller do
         expect(get :show, params: { id: region.id }).to be_successful
       end
     end
+
+    describe('GET #new') do
+      it('is successful') do
+        expect(get :new).to be_successful
+      end
+    end
   end
 
 end
