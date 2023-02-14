@@ -122,5 +122,12 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 expect(response).to redirect_to(dashboard_path)
             end
         end
+
+        describe "GET #edit" do
+            it "redirects to dashboard" do
+                get :edit, params: { id: resource_category.id }
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
     end
 end
