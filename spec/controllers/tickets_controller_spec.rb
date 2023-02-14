@@ -61,7 +61,7 @@ RSpec.describe TicketsController, type: :controller do
                 expect(response).to have_http_status(:success)
             end
         end
-        
+
         describe "GET #show" do
             it "redirects to dashboard" do
                 get :show, params: { id: ticket.id } 
@@ -85,6 +85,13 @@ RSpec.describe TicketsController, type: :controller do
         describe "GET #new" do
             it "has http status of success" do
                 get :new
+                expect(response).to have_http_status(:success)
+            end
+        end
+
+        describe "POST #create" do
+            it "has http status of success" do
+                post :create, params: { ticket: { name: "Sample Ticket" } }
                 expect(response).to have_http_status(:success)
             end
         end
