@@ -47,6 +47,14 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 expect(response).to have_http_status(:success)
             end
         end
+
+        describe "PATCH #activate" do
+            it "redirects to @resource_category" do
+                patch :activate, params: { id: resource_category.id }
+                expect(response).to redirect_to(resource_category_path(resource_category))
+            end
+        end
+
     end
 
     describe "User with approved organization" do
