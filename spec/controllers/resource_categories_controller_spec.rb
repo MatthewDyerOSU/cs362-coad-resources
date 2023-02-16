@@ -124,6 +124,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 expect(response).to redirect_to(dashboard_path)
             end
         end
+
+        describe "PATCH #deactivate" do
+            it "redirects to dashboard" do
+                patch :deactivate, params: { id: resource_category.id }
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
     end
 
     describe "User without approved organization" do
