@@ -8,6 +8,21 @@ RSpec.describe ResourceCategoriesController, type: :controller do
     let (:user_with_org) { create(:user, organization: approved_organization) }
     let (:resource_category) { create(:resource_category) }
 
+
+    describe('User is not logged in') do
+        it 'redirects to login page' do
+          expect(get :index).to redirect_to(new_user_session_path)
+          expect(get :show, params: { id: resource_category.id }).to redirect_to(new_user_session_path)
+          expect(get :new).to redirect_to(new_user_session_path)
+          expect(post :create).to redirect_to(new_user_session_path)
+          expect(get :edit, params: { id: resource_category.id }).to redirect_to(new_user_session_path)
+          expect(patch :update, params: { id: resource_category.id }).to redirect_to(new_user_session_path)
+          expect(patch :activate, params: { id: resource_category.id }).to redirect_to(new_user_session_path)
+          expect(patch :deactivate, params: { id: resource_category.id }).to redirect_to(new_user_session_path)
+          expect(delete :destroy, params: { id: resource_category.id }).to redirect_to(new_user_session_path)
+        end
+      end
+
     describe "User as an admin" do
         before(:each) do
             sign_in admin_user
