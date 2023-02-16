@@ -69,6 +69,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
             end
         end
 
+        describe "DELETE #destroy" do
+            it "redirects to resource_categories_path" do
+                delete :destroy, params: { id: resource_category.id }
+                expect(response).to redirect_to(resource_categories_path)
+            end
+        end
+
     end
 
     describe "User with approved organization" do
