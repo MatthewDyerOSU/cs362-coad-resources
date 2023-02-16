@@ -159,6 +159,12 @@ RSpec.describe ResourceCategoriesController, type: :controller do
             end
         end
 
+        describe "PATCH #update" do
+            it "redirects to @resource category" do
+                patch :update, params: { id: resource_category.id, resource_category: { name: "New Category Name" } }
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
 
         describe "PATCH #activate" do
             it "redirects to dashboard" do
