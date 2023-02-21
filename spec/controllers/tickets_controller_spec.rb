@@ -9,6 +9,20 @@ RSpec.describe TicketsController, type: :controller do
     let (:user_with_org) { create(:user, organization: approved_organization) }
 
     
+    describe('User is not logged in') do
+        it 'redirects to login page' do
+            expect(get :show, params: { id: ticket.id }).to redirect_to(dashboard_path)
+            expect(patch :capture, params: { id: ticket.id }).to redirect_to(dashboard_path)
+            expect(patch :release, params: { id: ticket.id }).to redirect_to(dashboard_path)
+            expect(patch :close, params: { id: ticket.id }).to redirect_to(dashboard_path)
+            expect(delete :destroy, params: { id: ticket.id }).to redirect_to(dashboard_path)
+        end
+        it 'is successful' do
+            expect(get :new).to be_successful
+            expect(post :create, params: { ticket: {name: "Sample Ticket"}}).to be_successful
+        end
+    end
+
     describe "User is an admin" do
         before(:each) do 
             sign_in admin_user

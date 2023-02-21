@@ -21,7 +21,7 @@ RSpec.describe ResourceCategoriesController, type: :controller do
           expect(patch :deactivate, params: { id: resource_category.id }).to redirect_to(new_user_session_path)
           expect(delete :destroy, params: { id: resource_category.id }).to redirect_to(new_user_session_path)
         end
-      end
+    end
 
     describe "User as an admin" do
         before(:each) do
@@ -111,11 +111,10 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         end
     end
 
-    describe "User without approved organization" do
+    describe "User is logged in without approved organization" do
         before(:each) do
             sign_in user_without_org
         end
-
         it 'redirects to dashboard' do
             sign_in(create(:user))
             expect(get :index).to redirect_to(dashboard_path)
