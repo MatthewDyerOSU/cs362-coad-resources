@@ -1,15 +1,12 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the TIcketsHelper. For example:
-#
-# describe TIcketsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe TicketsHelper, type: :helper do
+
+  describe 'formatting phone numbers' do
+    it 'normalizes a phone number with a US country code' do
+      phone_number = '555-555-5555'
+      expect(helper.format_phone_number(phone_number)).to eq('+15555555555')
+    end
+  end
 
 end
