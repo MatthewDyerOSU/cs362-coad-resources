@@ -19,6 +19,11 @@ RSpec.describe DashboardHelper, type: :helper do
       expect(helper.dashboard_for(user)).to eq('organization_approved_dashboard')
     end
 
+    it "returns 'create_application_dashboard' for users with no organization" do
+      user = build(:user, organization: nil)
+      expect(helper.dashboard_for(user)).to eq('create_application_dashboard')
+    end
+
   end
 
 end
