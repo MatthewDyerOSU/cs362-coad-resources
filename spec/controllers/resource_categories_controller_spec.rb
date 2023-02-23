@@ -54,6 +54,11 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 post :create, params: { resource_category: { name: "Sample Resource Category" } }
                 expect(response).to redirect_to(resource_categories_path)
             end
+            it "renders :new if if fails to save" do
+                expect_any_instance_of(ResourceCategory).to receive(:save).and_return(false)
+                post :create, params: { resource_category: { name: "Sample Resource Category" } }
+                expect(response).to render_template(:new)
+            end
         end
 
         describe "GET #edit" do
@@ -68,6 +73,11 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 patch :update, params: { id: resource_category.id, resource_category: { name: "New Category Name" } }
                 expect(response).to redirect_to(resource_category_path(resource_category))
             end
+            it "renders :edit if if fails to save" do
+                expect_any_instance_of(ResourceCategory).to receive(:update).and_return(false)
+                patch :update, params: { id: resource_category.id, resource_category: { name: "New Category Name" } }
+                expect(response).to render_template(:edit)
+            end
         end
 
         describe "PATCH #activate" do
@@ -75,12 +85,24 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 patch :activate, params: { id: resource_category.id }
                 expect(response).to redirect_to(resource_category_path(resource_category))
             end
+            it "redirects to @resource_category with error if fails to activate" do
+                expect_any_instance_of(ResourceCategory).to receive(:activate).and_return(false)
+                patch :activate, params: { id: resource_category.id }
+                expect(response).to redirect_to(resource_category_path(resource_category))
+                expect(flash[:alert]).to be_present
+            end
         end
 
         describe "PATCH #deactivate" do
             it "redirects to @resource_category" do
                 patch :deactivate, params: { id: resource_category.id }
                 expect(response).to redirect_to(resource_category_path(resource_category))
+            end
+            it "redirects to @resource_category with error if fails to deactivate" do
+                expect_any_instance_of(ResourceCategory).to receive(:deactivate).and_return(false)
+                patch :deactivate, params: { id: resource_category.id }
+                expect(response).to redirect_to(resource_category_path(resource_category))
+                expect(flash[:alert]).to be_present
             end
         end
 
