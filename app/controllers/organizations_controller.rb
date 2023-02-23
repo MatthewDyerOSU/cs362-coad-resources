@@ -47,23 +47,16 @@ class OrganizationsController < ApplicationController
   def approve
     @organization.approve
 
-    if @organization.save
-      redirect_to organizations_path, notice: "Organization #{@organization.name} has been approved."
-    else
-      render organization_path(id: @organization.id)
-    end
+    @organization.save
+    redirect_to organizations_path, notice: "Organization #{@organization.name} has been approved."
   end
 
   def reject
     @organization.reject
-
     @organization.rejection_reason = params[:organization][:rejection_reason] unless params[:organization][:rejection_reason].nil?
 
-    if @organization.save
-      redirect_to organizations_path, notice: "Organization #{@organization.name} has been rejected."
-    else
-      render organization_path(id: @organization.id)
-    end
+    @organization.save
+    redirect_to organizations_path, notice: "Organization #{@organization.name} has been rejected."
   end
 
   private
