@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe TicketsController, type: :controller do
-   
+
     let (:ticket) { create(:ticket) }
     let (:approved_organization) { create(:organization, status: :approved) }
     let (:user_without_org) { create(:user) }
     let (:admin_user) { create(:user, :admin) }
     let (:user_with_org) { create(:user, organization: approved_organization) }
 
-    
+
     describe('User is not logged in') do
         it 'redirects to login page' do
             expect(get :show, params: { id: ticket.id }).to redirect_to(dashboard_path)
@@ -24,7 +24,7 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe "User is an admin" do
-        before(:each) do 
+        before(:each) do
             sign_in admin_user
         end
 
@@ -36,9 +36,14 @@ RSpec.describe TicketsController, type: :controller do
         end
 
         describe "POST #create" do
-            it "has http status of success" do
+            it "has http status of success if it does not save" do
                 post :create, params: { ticket: { name: "Sample Ticket" } }
                 expect(response).to have_http_status(:success)
+            end
+            it "redirects to ticket_submitted_path if it saves" do
+                expect_any_instance_of(Ticket).to receive(:save).and_return(true)
+                post :create, params: { ticket: { name: "Sample Ticket" } }
+                expect(response).to redirect_to(ticket_submitted_path)
             end
         end
 
@@ -68,6 +73,11 @@ RSpec.describe TicketsController, type: :controller do
                 post :close, params: { id: ticket.id }
                 expect(response).to have_http_status(:success)
             end
+            it 'redirects to dashboard#tickets:open if close is ok' do
+                allow(TicketService).to receive(:close_ticket).and_return(:ok)
+                post :close, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path << '#tickets:open')
+            end
         end
 
         describe "DELETE #destroy" do
@@ -91,15 +101,20 @@ RSpec.describe TicketsController, type: :controller do
         end
 
         describe "POST #create" do
-            it "has http status of success" do
+            it "has http status of success if it does not save" do
                 post :create, params: { ticket: { name: "Sample Ticket" } }
                 expect(response).to have_http_status(:success)
+            end
+            it "redirects to ticket_submitted_path if it saves" do
+                expect_any_instance_of(Ticket).to receive(:save).and_return(true)
+                post :create, params: { ticket: { name: "Sample Ticket" } }
+                expect(response).to redirect_to(ticket_submitted_path)
             end
         end
 
         describe "GET #show" do
             it "redirects to dashboard" do
-                get :show, params: { id: ticket.id } 
+                get :show, params: { id: ticket.id }
                 expect(response).to redirect_to(dashboard_path)
             end
         end
@@ -146,9 +161,14 @@ RSpec.describe TicketsController, type: :controller do
         end
 
         describe "POST #create" do
-            it "has http status of success" do
+            it "has http status of success if it does not save" do
                 post :create, params: { ticket: { name: "Sample Ticket" } }
                 expect(response).to have_http_status(:success)
+            end
+            it "redirects to ticket_submitted_path if it saves" do
+                expect_any_instance_of(Ticket).to receive(:save).and_return(true)
+                post :create, params: { ticket: { name: "Sample Ticket" } }
+                expect(response).to redirect_to(ticket_submitted_path)
             end
         end
 
@@ -164,6 +184,11 @@ RSpec.describe TicketsController, type: :controller do
                 post :capture, params: { id: ticket.id }
                 expect(response).to have_http_status(:success)
             end
+            it "redirects to dashboard#tickets:open if capture ticket == ok" do
+                allow(TicketService).to receive(:capture_ticket).and_return(:ok)
+                post :capture, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path << '#tickets:open')
+            end
         end
 
         describe "POST #release" do
@@ -171,12 +196,22 @@ RSpec.describe TicketsController, type: :controller do
                 post :release, params: { id: ticket.id }
                 expect(response).to have_http_status(:success)
             end
+            it 'redirects to dashboard#tickets:organization if release ticket == ok' do
+                allow(TicketService).to receive(:release_ticket).and_return(:ok)
+                post :release, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path << '#tickets:organization')
+            end
         end
 
         describe "PATCH #close" do
             it "has http status of success" do
                 post :close, params: { id: ticket.id }
                 expect(response).to have_http_status(:success)
+            end
+            it 'redirects to dashboard#tickets:organization if close ticket == ok' do
+                allow(TicketService).to receive(:close_ticket).and_return(:ok)
+                post :close, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path << '#tickets:organization')
             end
         end
 
