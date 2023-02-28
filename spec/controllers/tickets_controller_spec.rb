@@ -86,6 +86,16 @@ RSpec.describe TicketsController, type: :controller do
                 expect(response).to redirect_to(dashboard_path << '#tickets')
             end
         end
+
+        describe "POST #release" do
+            it "redirects to dashboard#tickets:captured for valid ticket release and approved organization" do
+                admin_user.organization = approved_organization
+                admin_user.save
+                allow(TicketService).to receive(:release_ticket).and_return(:ok)
+                post :release, params: { id: 1 }
+                expect(response).to redirect_to(dashboard_path << '#tickets:captured')
+            end
+        end
     end
 
     describe "Non admin user without organization" do
