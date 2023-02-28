@@ -10,8 +10,11 @@ RSpec.describe TicketService do
         end
         it 'updates organization_id of ticket with nil' do
             expect(ticket).to receive(:organization_id=).with(nil)
-            described_class.release_ticket(1, user)
+            TicketService.release_ticket(1, user)
+        end
+        it 'returns :ok when ticket successfully released' do
+            expect(ticket).to receive(:organization_id=).with(nil)
+            expect(TicketService.release_ticket(1, user)).to eq(:ok)
         end
     end
-
 end
