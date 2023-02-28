@@ -14,10 +14,11 @@ RSpec.describe UserMailer, type: :mailer do
 
   describe "production" do
     it 'sends an email' do
-      allow_any_instance_of(UserMailer).to receive(:mail).and_return(true)
+      allow_any_instance_of(UserMailer).to receive(:mail)
       allow_any_instance_of(UserMailer).to receive(:params).and_return({to: ""})
       mailer = UserMailer.new
-      expect(mailer.new_organization_application).to be_truthy
+      mailer.new_organization_application
+      expect(mailer).to have_received(:mail)
     end
   end
 
