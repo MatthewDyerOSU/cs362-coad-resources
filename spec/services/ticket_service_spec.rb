@@ -34,8 +34,8 @@ RSpec.describe TicketService do
         end
     end
 
-    describe '#close_ticket' do
-        
+    # describe '#close_ticket' do
+
       
       
 end
