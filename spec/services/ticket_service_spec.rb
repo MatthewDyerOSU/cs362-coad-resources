@@ -17,6 +17,7 @@ RSpec.describe TicketService do
             expect(TicketService.release_ticket(1, user)).to eq(:ok)
         end
     end
+
     describe '#capture_ticket' do
         let(:organization) { double('organization', id: 'some_org_id', approved?: true) }
         let(:user) { double('user', organization: organization, organization_id: 'some_org_id') }
@@ -32,6 +33,9 @@ RSpec.describe TicketService do
           expect(TicketService.capture_ticket(1, user)).to eq(:ok)
         end
     end
+
+    describe '#close_ticket' do
+        
       
       
 end
