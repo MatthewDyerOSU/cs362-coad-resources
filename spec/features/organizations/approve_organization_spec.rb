@@ -11,6 +11,7 @@ RSpec.describe 'Approving an organization', type: :feature do
 
         click_on 'Organizations'
         click_on 'Pending'
+        save_and_open_page()
         click_on 'Review'
         click_on 'Approve'
 
@@ -20,7 +21,7 @@ RSpec.describe 'Approving an organization', type: :feature do
     it 'cannot be done by a non-admin user' do
         organization = create(:organization, :approved)
         not_approved_organization = create(:organization)
-        
+
         user = create(:user, organization: organization)
 
         log_in_as(user)
