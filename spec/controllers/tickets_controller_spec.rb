@@ -233,6 +233,7 @@ RSpec.describe TicketsController, type: :controller do
     end
   end
 
+  # this doesnt cover ticket_params, needs fixing
   describe '#ticket_params' do
     it ' returns the permitted params for a ticket' do
       params = ActionController::Parameters.new(
