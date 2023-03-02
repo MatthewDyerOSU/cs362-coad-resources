@@ -34,8 +34,21 @@ RSpec.describe TicketService do
         end
     end
 
-    # describe '#close_ticket' do
+    describe '#close_ticket' do
+        let(:organization) { double('organization', id: 'some_org_id', approved?: true) }
+        let(:user) { double('user', organization: organization, organization_id: 'some_org_id', admin?: true) }
+        let(:ticket) { double('ticket', organization_id: nil, save: true, closed_at: nil) }
 
-      
-      
+        before do
+            allow(Ticket).to receive(:find).and_return(ticket)
+            allow(ticket).to receive(:save).and_return(true)
+            allow(ticket).to receive(:closed_at=)
+        end
+
+        it 'returns :ok when ticket successfully closed' do
+            expect(ticket).to receive(:closed=).with(true)
+            expect(ticket).to receive(:closed_at=)
+            expect(TicketService.close_ticket(1, user)).to eq(:ok)
+        end
+    end
 end
