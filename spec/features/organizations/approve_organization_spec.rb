@@ -11,7 +11,11 @@ RSpec.describe 'Approving an organization', type: :feature do
 
     click_on 'Organizations'
     click_on 'Pending'
-    click_on 'Review'
+
+    within('div#pending') do
+        find('li#organization_1').click_on 'Review'
+    end
+
     click_on 'Approve'
 
     expect(organization.reload.approved?).to be true
@@ -27,7 +31,6 @@ RSpec.describe 'Approving an organization', type: :feature do
 
     visit dashboard_path
 
-    # expect(current_path).to_not have_content 'Organization Applications'
     visit organization_path(id: not_approved_organization.id)
     expect(page).not_to have_content 'Approve'
   end

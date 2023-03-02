@@ -232,4 +232,28 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
   end
+
+  describe '#ticket_params' do
+    it ' returns the permitted params for a ticket' do
+      params = ActionController::Parameters.new(
+        ticket: {
+          name: 'Test Name',
+          phone: '555-555-5555',
+          description: 'Test Description',
+          region_id: 1,
+          resource_category_id: 2,
+          unauthorized_param: 'unauthorized'
+        }
+      )
+      permitted_params = params.require(:ticket).permit(:name, :phone, :description, :region_id, :resource_category_id)
+
+      expect(permitted_params.to_h.symbolize_keys).to eq(
+        name: 'Test Name',
+        phone: '555-555-5555',
+        description: 'Test Description',
+        region_id: 1,
+        resource_category_id: 2
+      )
+    end
+  end
 end
