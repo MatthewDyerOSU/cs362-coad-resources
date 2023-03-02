@@ -19,7 +19,7 @@ RSpec.describe TicketService do
     end
     describe '#capture_ticket' do
         let(:organization) { double('organization', id: 'some_org_id', approved?: true) }
-        let(:user) { double('user', organization: organization) }
+        let(:user) { double('user', organization: organization, organization_id: 'some_org_id') }
         let(:ticket) { double('ticket', organization_id: nil, save: true) }
       
         before do
