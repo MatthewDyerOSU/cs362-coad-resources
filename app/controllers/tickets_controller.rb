@@ -8,6 +8,7 @@ class TicketsController < ApplicationController
   end
 
   def create
+    ticket_params()
     @ticket = Ticket.new(
       name: params[:ticket][:name],
       phone: format_phone_number(params[:ticket][:phone]),
