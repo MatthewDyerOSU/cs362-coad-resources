@@ -8,5 +8,14 @@ RSpec.describe Users::RegistrationsController, type: :controller do
         controller.send(:check_captcha)
       end
     end
+
+    # context 'when recaptcha is not verified' do
+    #   before do
+    #     allow(controller).to receive(:verify_recaptcha).and_return(false)
+    #   end
+    #   it 'renders a new view' do
+    #     expect(response).to render_template(:new)
+    #   end
+    # end
   end
 end
