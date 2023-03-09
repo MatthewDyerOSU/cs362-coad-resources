@@ -11,13 +11,9 @@ RSpec.describe 'Approving an organization', type: :feature do
 
     click_on 'Organizations'
     click_on 'Pending'
-
-    within('div#pending') do
-        find('li#organization_1').click_on 'Review'
-    end
-
+    first(:link, "Review").click
     click_on 'Approve'
-
+    organization.reload
     expect(organization.reload.approved?).to be true
   end
 

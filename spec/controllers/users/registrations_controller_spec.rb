@@ -13,5 +13,21 @@ RSpec.describe Users::RegistrationsController, type: :controller do
         controller.send(:check_captcha)
       end
     end
+
+    context 'when recaptcha is not verified' do
+      before do
+        allow(controller).to receive(:verify_recaptcha).and_return(false)
+        allow(controller).to receive(:resource_class).and_return(resource_class)
+        allow(controller).to receive(:sign_up_params).and_return(sign_up_params)
+        allow(resource).to receive(:validate)
+        allow(controller).to receive(:set_minimum_password_length)
+        allow(controller).to receive(:respond_with_navigational)
+      end
+
+      it 'renders new view' do
+        expect(controller).to receive(:render).with(:new)
+        controller.send(:check_captcha)
+      end
+    end
   end
 end
