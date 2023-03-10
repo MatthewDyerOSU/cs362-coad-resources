@@ -14,7 +14,7 @@ RSpec.describe 'Approving an organization', type: :feature do
     first(:link, "Review").click
     click_on 'Approve'
     organization.reload
-    expect(organization.reload.approved?).to be true
+    expect(organization.approved?).to be true
   end
 
   it 'cannot be done by a non-admin user' do
