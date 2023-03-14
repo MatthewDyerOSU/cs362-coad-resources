@@ -15,20 +15,20 @@ RSpec.describe 'Rejecting an organization', type: :feature do
         click_on 'Reject'
         organization.reload
         expect(organization.rejected?).to be true
-      end
+    end
     
-    #   it 'cannot be done by a non-admin user' do
-    #     organization = create(:organization, :approved)
-    #     not_approved_organization = create(:organization)
-    
-    #     user = create(:user, organization: organization)
-    
-    #     log_in_as(user)
-    
-    #     visit dashboard_path
-    
-    #     visit organization_path(id: not_approved_organization.id)
-    #     expect(page).not_to have_content 'Reject'
-    #   end
+    it 'cannot be done by a non-admin user' do
+        organization = create(:organization, :approved)
+        not_approved_organization = create(:organization)
+
+        user = create(:user, organization: organization)
+
+        log_in_as(user)
+
+        visit dashboard_path
+
+        visit organization_path(id: not_approved_organization.id)
+        expect(page).not_to have_content 'Reject'
+    end
 
 end
