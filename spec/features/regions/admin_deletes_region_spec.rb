@@ -27,5 +27,4 @@ RSpec.describe 'Deleting a Region', type: :feature do
       expect(page).not_to have_content('Regions')
     end
   end
-
 end
