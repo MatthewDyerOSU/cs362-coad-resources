@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Creating a Ticket', type: :feature do
     it 'can create a ticket' do
+        create(:region, name: 'Bend')
+        create(:resource_category, name: 'General')
         visit new_ticket_path
         fill_in 'ticket_name', with: 'Test Name'
         fill_in 'ticket_phone', with: '5555555555'
