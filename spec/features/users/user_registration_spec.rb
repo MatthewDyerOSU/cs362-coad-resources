@@ -19,6 +19,15 @@ RSpec.describe 'User registration', type: :feature do
       end
       expect(page).to have_content('Password confirmation doesn\'t match Password')
     end
+
+    it 'fails if passwords are less than 7 characters' do
+      fill_in 'Password', with: '123456'
+      fill_in 'Password confirmation', with: '123456'
+      within('#new_user') do
+        click_on 'Sign up'
+      end
+      expect(page).to have_content('Password is too short (minimum is 7 characters)')
+    end
   end
 
 end
