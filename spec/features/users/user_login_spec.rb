@@ -13,6 +13,7 @@ RSpec.describe 'Logging in', type: :feature do
     fill_in 'Password', with: 'wrongpassword'
     click_on 'Sign in'
     expect(page).to have_content('Invalid Email or password.')
+    expect(page).to have_current_path(new_user_session_path)
   end
 
   it 'succeeds with valid credentials' do
