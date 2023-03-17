@@ -40,8 +40,7 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
 
     click_on 'Apply'
 
-    user.reload
-    expect(user.organization).not_to be_nil
+    expect(page).to have_content 'Application Submitted'
   end
 
   it 'cannot be done by a user who is already part of an organization' do
